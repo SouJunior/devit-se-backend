@@ -19,7 +19,6 @@ export class CreateCompanyDto {
   })
   companyName: string;
 
-  @IsOptional()
   @IsNotEmpty()
   @IsString()
   @MaxLength(14)
@@ -28,7 +27,7 @@ export class CreateCompanyDto {
     description: 'CNPJ',
     example: '67.979.311/0001-15',
   })
-  cnpj?: string;
+  cnpj: string;
 
   @IsOptional()
   @IsEnum(SectorEnum)

@@ -10,7 +10,7 @@ export class CompanyEntity {
     @Column()
     companyName: string
 
-    @Column( { nullable: true})
+    @Column()
     cnpj: string
     
     @Column({
