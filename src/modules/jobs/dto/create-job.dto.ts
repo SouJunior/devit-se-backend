@@ -165,21 +165,18 @@ export class CreateJobDto {
   @IsString()
   company_id?: string;
 
-  @IsDate()
-  @MaxDate(new Date())
   @ApiProperty({
     required: true,
     description: 'Data da divulgação da vaga',
     example: "data tal",
   })
-  publicationDate: Date
+  publicationDate: string
 
-  @IsDate()
-  @MinDate(new Date())
+  @IsOptional()
   @ApiProperty({
     required: true,
     description: 'Data do encerramento da vaga',
     example: "data tal",
   })
-  finishDate: Date
+  finishDate?: string
 }

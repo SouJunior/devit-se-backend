@@ -10,7 +10,7 @@ export class CompanyEntity {
     @Column()
     companyName: string
 
-    @Column( { nullable: true})
+    @Column()
     cnpj: string
     
     @Column({
@@ -24,9 +24,9 @@ export class CompanyEntity {
     @Column({ nullable: true})
     complement: string
     
-    @Column()
+    @Column({ nullable: true})
     district: string
 
     @OneToMany(() => JobsEntity, (jobs) => jobs.company)
-    jobs: JobsEntity 
+    jobs: JobsEntity[]
 }

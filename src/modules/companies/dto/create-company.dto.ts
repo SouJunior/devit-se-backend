@@ -47,14 +47,13 @@ export class CreateCompanyDto {
   })
   sector?: string;
 
-  @IsOptional()
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
     description: 'Endereço da empresa',
     example: 'Rua tal, número tal',
   })
-  address?: string;
+  address: string;
 
   @IsString()
   @IsOptional()
