@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm"
-import { CompanyEntity } from "./company.entity"
-
+import { CompanyEntity } from "./company.entity" 
 @Entity()
 export class JobsEntity {
 
@@ -17,13 +16,13 @@ export class JobsEntity {
     publicityChannel: string
 
     @Column()
-    status: boolean
+    jobStatus: boolean
 
     @Column()
     jobFormat: string
 
-    @Column()
-      typeContract: string;
+    @Column({ nullable: true })
+    contractType: string;
 
     @Column({ nullable: true })
     salary: string
@@ -46,7 +45,7 @@ export class JobsEntity {
     devitRating: string
 
     @Column()
-    CompanyName: string
+    companyName: string
 
     @Column()
     publicationDate: Date
