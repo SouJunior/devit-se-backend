@@ -11,14 +11,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
       secretOrKey: process.env.JWT_SECRET,
-      // algorithms: ["RS256"]
     });
   }
 
   async validate(payload: { userName: string }) {
     const company = await this.companyRepository.findOneCompanyByUserName(payload.userName);
 
-    console.log(company)
     if (!company) {
       throw new UnauthorizedException('Company not found or not authorized!');
     }

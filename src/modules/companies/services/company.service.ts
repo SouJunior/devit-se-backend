@@ -22,6 +22,8 @@ export class CompanyService {
     data.companyPassword = await bcrypt.hash(data.companyPassword, 10)
     
     await this.companyRepository.createCompany(data)
+
+    return { status: 201, message: "Company created successfully"}
   }
 
   findAllCompanies() {
