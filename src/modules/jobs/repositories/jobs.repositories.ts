@@ -5,6 +5,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 
 export class JobsRepository {
     constructor(@InjectRepository(JobsEntity) private jobsRepository: Repository<JobsEntity>) {}
+    
     async createNewJob(data: CreateJobDto) {
         await this.jobsRepository.save(data);
         return;
@@ -12,9 +13,11 @@ export class JobsRepository {
 
     async getAllJobs() {
         await this.jobsRepository.find()
+        return;
     }
 
     async getJobById(id: string) {
         await this.jobsRepository.find({ where: {id} })
+        return;
     }
 }

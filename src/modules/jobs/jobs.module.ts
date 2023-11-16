@@ -6,12 +6,18 @@ import { GetAllJobsService } from './services/getAllJobs.service';
 import { JobsRepository } from './repositories/jobs.repositories';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JobsEntity } from 'src/database/entities/Jobs.entity';
+import { PassportModule } from '@nestjs/passport';
+import { CompanyModule } from '../companies/company.module';
+import { CompanyRepository } from '../companies/repositories/company.repository';
+import { CompanyEntity } from 'src/database/entities/company.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([JobsRepository, JobsEntity])
+    CompanyModule,
+    TypeOrmModule.forFeature([JobsRepository, JobsEntity, CompanyEntity]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
   controllers: [JobsController],
-  providers: [CreateJobService, GetAllJobsService, GetOneJobByIdService, JobsRepository]
+  providers: [CreateJobService, GetAllJobsService, GetOneJobByIdService, JobsRepository, CompanyRepository]
 })
 export class JobsModule {}

@@ -60,4 +60,8 @@ export class JobsDraftEntity {
 
     @Column()
     company_id: string;
+
+    constructor(jobsDrafts: Partial<JobsDraftEntity>) {
+      Object.assign(this, jobsDrafts)
+  }
 }

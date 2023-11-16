@@ -5,10 +5,21 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
+import { NestExpressApplication } from "@nestjs/platform-express";
+import { ConfigService } from "@nestjs/config";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true
+  });
+
+  const configService = app.get(ConfigService)
+  const port = configService.get("PORT")
+
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    transform: true
+  }));
 
   const config = new DocumentBuilder()
     .setTitle('Devit-se-Backend')
@@ -22,7 +33,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(port);
+
+  console.info('Server initiated on port ' + process.env.PORT);
 }
 
 bootstrap()
