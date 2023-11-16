@@ -10,11 +10,16 @@ export class CompanyController {
 
   @Post()
   async create(@Body() data: CreateCompanyDto) {
-    return this.companyService.create(data);
+    return this.companyService.createCompany(data);
   }
 
   @Get()
   findAll() {
-    return this.companyService.findAll();
+    return this.companyService.findAllCompanies();
+  }
+
+    @Get(":userName")
+    async findOneCompany(@Param("userName") userName: string) {
+      return this.companyService.findOneByUserName(userName);
   }
 }

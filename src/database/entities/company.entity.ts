@@ -10,6 +10,14 @@ export class CompanyEntity {
     @Column()
     companyName: string
 
+    @Column({
+        unique: true
+    })
+    companyUserName: string
+
+    @Column()
+    companyPassword: string
+
     @Column()
     cnpj: string
     
@@ -29,4 +37,8 @@ export class CompanyEntity {
 
     @OneToMany(() => JobsEntity, (jobs) => jobs.company)
     jobs: JobsEntity[]
+
+    constructor(company: Partial<CompanyEntity>) {
+        Object.assign(this, company)
+    }
 }

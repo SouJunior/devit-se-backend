@@ -4,6 +4,8 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  Length,
+  Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -19,13 +21,34 @@ export class CreateCompanyDto {
   })
   companyName: string;
 
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(20)
+  @ApiProperty({
+    description: 'Nome de usuário da empresa',
+    example: 'Pipomills123',
+  })
+  companyUserName: string
+
+  @IsString()
+  @IsNotEmpty()
+  @Length(8, 20)
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+    message: 'Senha muito fraca',
+  })
+  @ApiProperty({
+    description: 'Senha de login da empresa',
+    example: 'Pipo@123',
+  })
+  companyPassword: string
+
   @IsNotEmpty()
   @IsString()
   @MaxLength(14)
   @MinLength(14)
   @ApiProperty({
     description: 'CNPJ',
-    example: '67.979.311/0001-15',
+    example: '67979311000115',
   })
   cnpj: string;
 
