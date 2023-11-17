@@ -100,6 +100,7 @@ export class CreateJobDto {
   })
   hardRequirements?: string;
 
+  @IsOptional()
   @IsNotEmpty()
   @IsString()
   @MaxLength(100)
@@ -108,7 +109,7 @@ export class CreateJobDto {
     description: "Nome da empresa que oferece esta vaga",
     example: "Empresa tal"
   })
-  companyName: string
+  companyName?: string
 
   @IsOptional()
   @IsString()
@@ -164,19 +165,4 @@ export class CreateJobDto {
   @Exclude()
   @IsString()
   company_id?: string;
-
-  @ApiProperty({
-    required: true,
-    description: 'Data da divulgação da vaga',
-    example: "data tal",
-  })
-  publicationDate: string
-
-  @IsOptional()
-  @ApiProperty({
-    required: true,
-    description: 'Data do encerramento da vaga',
-    example: "data tal",
-  })
-  finishDate?: string
 }

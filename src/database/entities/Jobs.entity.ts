@@ -47,7 +47,7 @@ export class JobsEntity {
     @Column()
     companyName: string
 
-    @Column()
+    @Column({ default: new Date()})
     publicationDate: Date
 
     @Column({ nullable: true})
@@ -59,4 +59,8 @@ export class JobsEntity {
 
     @Column()
     company_id: string;
+
+    constructor(jobs: Partial<JobsEntity>) {
+        Object.assign(this, jobs)
+    }
 }
